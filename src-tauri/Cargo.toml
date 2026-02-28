@@ -4,10 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [build-dependencies]
-tauri-build = { version = "1", features = [] }
+tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "1", features = ["protocol-asset"] }
+tauri = { version = "2" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 url = "2"
@@ -22,7 +22,3 @@ tower-http = { version = "0.6", features = ["cors"] }
 
 [dev-dependencies]
 reqwest = { version = "0.12", features = ["json"] }
-
-[features]
-default = ["custom-protocol"]
-custom-protocol = ["tauri/custom-protocol"]
