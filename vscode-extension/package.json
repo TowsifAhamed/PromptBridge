@@ -1,0 +1,26 @@
+{
+  "name": "promptbridge-vscode",
+  "displayName": "PromptBridge",
+  "version": "0.1.0",
+  "publisher": "promptbridge",
+  "engines": { "vscode": "^1.85.0" },
+  "activationEvents": [
+    "onCommand:vibecode.openPanel",
+    "onCommand:vibecode.consumeLastPrompt"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "vibecode.openPanel", "title": "VibeCode: Open Panel" },
+      { "command": "vibecode.consumeLastPrompt", "title": "VibeCode: Consume Last Prompt" },
+      { "command": "vibecode.copyPrompt", "title": "VibeCode: Copy Prompt" }
+    ]
+  },
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/vscode": "^1.85.0"
+  }
+}

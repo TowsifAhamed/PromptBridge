@@ -1,10 +1,10 @@
-use std::process::Command;
+use crate::models::{PromptRequest, PromptResponse};
+use crate::runners::{clipboard, vscode};
 
-pub fn run(prompt: &str) -> Result<(), String> {
-    Command::new("continue")
-        .arg(prompt)
-        .spawn()
-        .map_err(|e| e.to_string())?;
-
-    Ok(())
+pub fn run(req: &PromptRequest) -> Result<PromptResponse, String> {
+    let mut response = vscode::run(req).or_else(|_| clipboard::run(req))?;
+    response
+        .next_actions
+        .push("Inside VS Code, use PromptBridge panel and forward to Continue.".into());
+    Ok(response)
 }
