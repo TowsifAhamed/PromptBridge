@@ -5,3 +5,6 @@
 - Prompt length max is 50k characters.
 - Tool routing uses strict allowlist (`Tool` enum).
 - No arbitrary shell support: runners invoke fixed binaries only.
+
+- CORS is restricted to localhost origins + configured allowlist.
+- Server startup asserts loopback-only bind addresses.

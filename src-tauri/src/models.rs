@@ -82,3 +82,36 @@ pub struct UiStatus {
     pub status: String,
     pub last_message: Option<String>,
 }
+
+#[cfg(test)]
+mod tests {
+    use super::{PromptRequest, Tool, MAX_PROMPT_LEN};
+
+    #[test]
+    fn rejects_empty_prompt() {
+        let req = PromptRequest {
+            tool: Tool::Clipboard,
+            prompt: "   ".into(),
+            repo: None,
+            cwd: None,
+            files: None,
+            mode: None,
+            metadata: None,
+        };
+        assert!(req.validate().is_err());
+    }
+
+    #[test]
+    fn rejects_oversized_prompt() {
+        let req = PromptRequest {
+            tool: Tool::Clipboard,
+            prompt: "x".repeat(MAX_PROMPT_LEN + 1),
+            repo: None,
+            cwd: None,
+            files: None,
+            mode: None,
+            metadata: None,
+        };
+        assert!(req.validate().is_err());
+    }
+}

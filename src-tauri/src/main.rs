@@ -68,6 +68,7 @@ fn main() {
             state.clone(),
             config.http_bind.clone(),
             config.http_token.clone(),
+            config.cors_allowlist.clone(),
         );
     }
 

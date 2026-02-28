@@ -4359,6 +4359,7 @@ dependencies = [
  "tauri",
  "tauri-build",
  "tokio",
+ "tower-http",
  "url",
  "uuid",
 ]
