@@ -11,6 +11,7 @@ use config::AppConfig;
 use models::{PromptRequest, PromptResponse, UiStatus};
 use protocol::handler::parse_vibecode_url;
 use state::SharedState;
+use tauri::Manager;
 
 #[tauri::command]
 fn handle_protocol(

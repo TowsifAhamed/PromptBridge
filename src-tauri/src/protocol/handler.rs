@@ -79,6 +79,7 @@ pub fn parse_vibecode_url(url: &str) -> Result<PromptRequest, String> {
 mod tests {
     use super::parse_vibecode_url;
     use crate::models::Tool;
+    use base64::Engine;
 
     #[test]
     fn parses_query() {

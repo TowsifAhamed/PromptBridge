@@ -4,7 +4,7 @@ use axum::{
     extract::State,
     http::{HeaderMap, HeaderValue, Method, StatusCode},
     response::IntoResponse,
-    routing::{options, post},
+    routing::post,
     Json, Router,
 };
 use std::net::SocketAddr;
