@@ -20,12 +20,6 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
-    "protocols": [
-      {
-        "name": "vibecode",
-        "role": "viewer"
-      }
-    ]
+    "targets": "all"
   }
 }
