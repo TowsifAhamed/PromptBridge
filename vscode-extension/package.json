@@ -3,6 +3,7 @@
   "displayName": "PromptBridge",
   "version": "0.1.0",
   "publisher": "promptbridge",
+  "icon": "images/icon.png",
   "engines": { "vscode": "^1.85.0" },
   "activationEvents": [
     "onCommand:vibecode.openPanel",
