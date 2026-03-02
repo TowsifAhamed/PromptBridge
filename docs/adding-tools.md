@@ -1,11 +1,6 @@
-# Adding New Tools
+# Adding Tools
 
-1. Create a runner in `src-tauri/src/runners`.
-2. Implement:
-
-   ```rust
-   pub fn run(prompt: &str) -> Result<(), String>
-   ```
-
-3. Register the runner in `src-tauri/src/router/tool_router.rs`.
-4. Rebuild the app.
+1. Add runner in `src-tauri/src/runners/<tool>.rs` returning `PromptResponse`.
+2. Wire in `router/tool_router.rs` and `Tool` enum.
+3. Add validation/security checks (no unrestricted shell execution).
+4. Document CLI requirements and fallback UX.

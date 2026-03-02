@@ -3,10 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VibeCode Router</title>
+    <title>PromptBridge</title>
   </head>
   <body>
-    <h1>VibeCode Router</h1>
-    <p>Protocol routing service is active when this app is running.</p>
+    <h1>PromptBridge</h1>
+    <p id="status">Idle</p>
+    <textarea id="prompt" rows="8" cols="80">Summarize this repository and propose improvements.</textarea>
+    <br />
+    <label>Tool
+      <select id="tool">
+        <option value="clipboard">clipboard</option>
+        <option value="codex">codex</option>
+        <option value="claude">claude</option>
+        <option value="vscode">vscode</option>
+        <option value="continue">continue</option>
+      </select>
+    </label>
+    <button id="run">Run Prompt</button>
+
+    <h2>Desktop Settings Snapshot</h2>
+    <pre id="settings"></pre>
+
+    <script type="module">
+      import { createRunButton } from './sdk/vibecode-web.js';
+      import { invoke } from '@tauri-apps/api/core';
+
+      const statusEl = document.getElementById('status');
+      const settingsEl = document.getElementById('settings');
+
+      async function loadSettings() {
+        try {
+          const settings = await invoke('get_settings');
+          settingsEl.textContent = JSON.stringify(settings, null, 2);
+        } catch (err) {
+          settingsEl.textContent = `Settings unavailable: ${err}`;
+        }
+      }
+
+      createRunButton(document.getElementById('run'), () => ({
+        tool: document.getElementById('tool').value,
+        prompt: document.getElementById('prompt').value,
+        mode: 'auto',
+        onStatus: ({ message }) => (statusEl.textContent = message),
+        onError: (err) => (statusEl.textContent = `Error: ${err.message || err}`),
+      }));
+
+      loadSettings();
+    </script>
   </body>
 </html>

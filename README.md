@@ -1,40 +1,34 @@
-# VibeCode Router (Starter)
+# PromptBridge v0.1
 
-VibeCode Router is a cross-platform desktop router for sending `vibecode://` prompts to local coding tools.
+PromptBridge routes prompts from web links (`vibecode://`) or localhost HTTP fallback to local coding tools.
 
-## Architecture
+## Features
+- Deep link parsing + startup arg handling for `vibecode://run?...`
+- HTTP fallback server: `POST http://127.0.0.1:17777/run` with bearer token
+- Tool runners: `codex`, `claude`, `vscode`, `continue`, `clipboard/generic`
+- Prompt validation (max 50k chars), strict tool allowlist
+- Companion VS Code extension (`/vscode-extension`) for `.vibecode/last_prompt.json`
 
-```text
-Website / SDK
-   ↓  vibecode://run?tool=codex&prompt=...
-OS Protocol Handler
-   ↓
-Tauri App (Rust Core)
-   ↓
-Tool Router
-   ├─ Codex CLI
-   ├─ Claude CLI
-   ├─ VS Code
-   ├─ Continue.dev
-   └─ Future agents
-```
-
-## Quick start
-
+## Development
 ```bash
 npm install
-cargo install tauri-cli
-cargo tauri dev
+npm run tauri dev
 ```
 
-## Build installers
-
+## Test
 ```bash
-cargo tauri build
+cargo test --manifest-path src-tauri/Cargo.toml
 ```
 
-## Protocol example
+## Protocol quick test
+```bash
+vibecode://run?tool=clipboard&prompt=hello
+```
 
-```text
-vibecode://run?tool=codex&prompt=Fix+failing+pytest+cases
+## HTTP quick test
+```bash
+curl -X POST http://127.0.0.1:17777/run \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -d '{"tool":"clipboard","prompt":"hello"}'
 ```
